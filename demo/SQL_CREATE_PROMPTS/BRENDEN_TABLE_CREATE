@@ -1,0 +1,24 @@
+-- Table: public.users
+
+-- DROP TABLE IF EXISTS public.users;
+
+CREATE TABLE IF NOT EXISTS public.users
+(
+    name text COLLATE pg_catalog."default" NOT NULL,
+    username text COLLATE pg_catalog."default" NOT NULL,
+    password text COLLATE pg_catalog."default" NOT NULL,
+    home_address text COLLATE pg_catalog."default",
+    email text COLLATE pg_catalog."default",
+    utoken text COLLATE pg_catalog."default" NOT NULL,
+    stoken text COLLATE pg_catalog."default",
+    CONSTRAINT users_pkey PRIMARY KEY (username),
+    CONSTRAINT username UNIQUE (username)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.users
+    OWNER to postgres;
+
+COMMENT ON CONSTRAINT username ON public.users
+    IS 'adw';

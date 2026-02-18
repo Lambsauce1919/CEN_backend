@@ -1,0 +1,6 @@
+Hello, if you are reading this you must do the following
+
+1) Create your postgres tables
+2) Copy the CREATE code
+3) Create a TXT file in here following the naming scheme (FIRSTNAME_TABLE_CREATE)
+
