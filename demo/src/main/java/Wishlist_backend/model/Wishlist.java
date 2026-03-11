@@ -1,4 +1,5 @@
 package Wishlist_backend.model;
+import java.util.List;
 
 public class Wishlist {
 
@@ -6,6 +7,7 @@ public class Wishlist {
     private String token;
     private String name;
     private User user;
+    private List<Book> books;
 
     public Wishlist(){}
 
@@ -40,4 +42,5 @@ public class Wishlist {
         return token;
     }
     public void setToken(String token) {this.token = token;}
+    public List<Book> getBooks() {return books;}
 }
