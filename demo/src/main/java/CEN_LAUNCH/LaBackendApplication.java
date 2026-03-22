@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = {
 	    "CEN_LAUNCH",
-	    "SEC_CONF",      
+	    "SEC_CONF",
 	    "pf_mgmt",
 		"Book_Browsing",
 		"Wishlist_backend"
