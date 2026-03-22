@@ -17,21 +17,35 @@ public class WishlistController{
     private JdbcTemplate jd;
 
     @PostMapping("/create")
-    public void createWishlist(@RequestBody Wishlist wishlistData) {
-        String token = wishlistData.getToken();
-        String sql = "SELECT id FROM users WHERE token = ?";
+    public int createWishlist(@RequestBody Wishlist wishlistData) {
 
         try{
-            Integer userId = jd.queryForObject(sql, Integer.class, token);
+            String token = wishlistData.getToken();
+            Integer userId = jd.queryForObject("SELECT id FROM users WHERE token = ? OR stoken = ?", Integer.class, token, token);
             if (userId != null) {
-                jd.update("INSERT INTO wishlists (name, users_id) VALUES (?,?)", wishlistData.getName(), userId);
-                System.out.println("Wishlist created!");
+                Integer count = jd.queryForObject("SELECT COUNT(*) FROM wishlists WHERE users_id = ?", Integer.class, userId);
+
+                if (count < 3) {
+                    return jd.queryForObject("INSERT INTO wishlists (name, users_id) VALUES (?,?) RETURNING id", Integer.class, wishlistData.getName(), userId);
+                }
+                else{
+                    System.out.println("The maximum number of wishlists has been reached!");
+                    return -1;
+                }
+
             }
         }
         catch (Exception e){
             System.out.println("There was an error while creating the wishlist!");
+            System.out.println(e.getMessage());
+            return -1;
         }
+        return -1;
+    }
 
+    @PostMapping("/addBook")
+    public void addBook(@RequestParam int wishlistId, @RequestParam int bookId) {
+        jd.update("INSERT INTO wishlist_books (wishlist_id, book_id) VALUES (?,?)", wishlistId, bookId);
     }
 
     /*
