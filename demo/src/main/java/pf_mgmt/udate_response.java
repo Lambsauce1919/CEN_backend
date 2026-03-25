@@ -3,6 +3,7 @@ package pf_mgmt;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,7 +67,7 @@ public class udate_response {
 		String type = null;
 		String value = null;
 		if (payload.containsKey(1)) {  // User name change
-		type = "username";
+		type = "email";
 		value = payload.get(1);
 		} else if (payload.containsKey(2)) { // New password
 		type = "password";	
@@ -87,12 +88,25 @@ public class udate_response {
 		
 		 String updateField = "UPDATE users SET " + type + " = ? WHERE stoken = ?";
 		 
+		 try {
+		 
 		 int updated = jd.update(updateField, value, sToken);
+		 
 		 
 		 if (updated < 1) {
 				// There were no matches for the provided information. 
 				return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 			} 
+		 
+		 }
+		 
+		 catch (DataIntegrityViolationException ex) {
+	         
+	                System.out.println("Internal error when attempting to save book information. ISBN already exists");
+	                ResponseEntity.status(HttpStatus.CONFLICT).build();
+	        }
+		 
+	
 		 
 		return ResponseEntity.ok("Successfull");
 		
