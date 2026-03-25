@@ -8,11 +8,9 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {
 	    "CEN_LAUNCH",
 	    "SEC_CONF",
-		"Wishlist_backend",
-	    "pf_mgmt"        
-	    "SEC_CONF",      
 	    "pf_mgmt",
-		"Book_Browsing"
+		"Book_Browsing",
+		"Wishlist_backend"
 	})
 
 
