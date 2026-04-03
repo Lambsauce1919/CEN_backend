@@ -3,6 +3,7 @@ package Wishlist_backend.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+//Class made as to test and see how the RestController works with a sample GET call.
 @RestController
 public class UserController{
     @GetMapping("/test-user")
