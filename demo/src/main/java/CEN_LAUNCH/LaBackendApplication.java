@@ -19,6 +19,6 @@ public class LaBackendApplication {
 		SpringApplication.run(LaBackendApplication.class, args);
 		System.out.println("Started successfully");
 	}
-	
-	
+
+
 }

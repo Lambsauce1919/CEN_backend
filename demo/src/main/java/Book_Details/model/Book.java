@@ -32,6 +32,9 @@ public class Book {
     @Column(name = "copies_sold", nullable = false)
     private Integer copiesSold = 0;
 
+    @Column(name = "rating")
+    private Double rating;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "author_id", referencedColumnName = "author_id")
     private Author author;
@@ -59,6 +62,9 @@ public class Book {
 
     public Integer getCopiesSold() { return copiesSold; }
     public void setCopiesSold(Integer copiesSold) { this.copiesSold = copiesSold; }
+
+    public Double getRating() { return rating; }
+    public void setRating(Double rating) { this.rating = rating; }
 
     public Author getAuthor() { return author; }
     public void setAuthor(Author author) { this.author = author; }
